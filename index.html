@@ -1,834 +1,799 @@
 <!DOCTYPE html>
-<html class="dark" lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Yamin Hassan Mahdi - Full Portfolio</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <title>Yamin Hassan Mahdi - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#137fec",
-                        "background-light": "#f6f7f8",
-                        "background-dark": "#101922",
-                        "card-dark": "#1a242f",
-                        "card-hover": "#212d3b",
-                        "text-secondary": "#9dabb9",
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        dark: {
+                            900: '#0f172a',
+                        }
                     },
                     fontFamily: {
-                        "display": ["Inter", "sans-serif"],
-                        "body": ["Inter", "sans-serif"]
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
                     },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
+                    animation: {
+                        'marquee': 'marquee 40s linear infinite',
                     },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
                 },
             },
         }
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
-
         ::-webkit-scrollbar-track {
-            background: #101922;
+            background: #f1f5f9;
         }
-
         ::-webkit-scrollbar-thumb {
-            background: #283039;
-            border-radius: 4px;
+            background: #cbd5e1;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3e4854;
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .menu-open { transform: translateX(0) !important; }
+        .menu-closed { transform: translateX(100%) !important; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
 
-<body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased selection:bg-primary selection:text-white">
-    <div class="fixed top-6 left-0 w-full flex justify-center z-50 px-4">
-        <nav
-            class="bg-white/80 dark:bg-[#1a242f]/80 backdrop-blur-md border border-slate-200 dark:border-[#283039] rounded-full px-6 py-3 shadow-lg flex items-center gap-6 md:gap-8 overflow-x-auto max-w-full">
-            <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap" href="#hero">Home</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap" href="#about">About</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap" href="#ventures">Ventures</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap" href="#experience">Experience</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap" href="#honors">Honors</a>
-            <a class="px-4 py-1.5 bg-primary text-white rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors whitespace-nowrap"
-                href="#contact">Connect</a>
-        </nav>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-600 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#hero" class="text-2xl font-extrabold tracking-tight text-slate-900">
+                    Yamin<span class="text-brand-600">.tech</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">About</a>
+                    <a href="#ventures" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Ventures</a>
+                    <a href="#experience" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Experience</a>
+                    <a href="#skills" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Skills</a>
+                    <a href="#honors" class="text-sm font-medium text-slate-600 hover:text-brand-600 transition-colors">Honors</a>
+                    <a href="#contact" class="px-5 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-full hover:bg-brand-700 transition-all shadow-lg shadow-brand-500/30">
+                        Let's Connect
+                    </a>
+                </div>
+
+                <!-- Mobile Button -->
+                <button onclick="toggleMenu()" class="md:hidden p-2 text-slate-600 hover:text-brand-600">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 z-40 hidden transition-opacity opacity-0 backdrop-blur-sm" onclick="toggleMenu()"></div>
+    
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-80 bg-white z-50 transform translate-x-full shadow-2xl flex flex-col p-6 menu-closed">
+        <div class="flex justify-between items-center mb-8 border-b border-slate-100 pb-4">
+            <span class="text-xl font-bold text-slate-900">Menu</span>
+            <button onclick="toggleMenu()" class="p-2 text-slate-500 hover:text-brand-600">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+        </div>
+        <div class="flex flex-col space-y-4">
+            <a href="#about" onclick="toggleMenu()" class="text-lg font-medium text-slate-600 hover:text-brand-600">About</a>
+            <a href="#ventures" onclick="toggleMenu()" class="text-lg font-medium text-slate-600 hover:text-brand-600">Ventures</a>
+            <a href="#experience" onclick="toggleMenu()" class="text-lg font-medium text-slate-600 hover:text-brand-600">Experience</a>
+            <a href="#skills" onclick="toggleMenu()" class="text-lg font-medium text-slate-600 hover:text-brand-600">Skills</a>
+            <a href="#honors" onclick="toggleMenu()" class="text-lg font-medium text-slate-600 hover:text-brand-600">Honors</a>
+            <a href="#contact" onclick="toggleMenu()" class="text-lg font-bold text-brand-600">Contact Me</a>
+        </div>
     </div>
-    <section
-        class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden pt-20"
-        id="hero">
-        <div class="absolute inset-0 z-0 opacity-20 pointer-events-none"
-            style="background-image: radial-gradient(#137fec 1px, transparent 1px); background-size: 40px 40px;"></div>
-        <div class="relative z-10 max-w-4xl flex flex-col gap-6 items-center animate-fade-in-up">
-            <div
-                class="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-wider uppercase mb-4">
-                <span class="material-symbols-outlined text-[16px]">location_on</span>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 bg-white overflow-hidden relative" id="hero">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-brand-50 rounded-l-[100px] -z-10 translate-x-1/3"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-100 rounded-full blur-3xl opacity-50 -z-10 -translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-brand-700 text-sm font-semibold mb-8 animate-fade-in-up">
+                <span class="material-symbols-outlined text-[18px]">location_on</span>
                 Dhaka, Bangladesh
             </div>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.1]">
-                Yamin <span class="text-primary">Hassan</span> Mahdi
+            
+            <h1 class="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+                <span class="whitespace-nowrap">Yamin Hassan</span> <span class="text-brand-600 relative whitespace-nowrap">Mahdi
+                    <svg class="absolute w-full h-3 -bottom-1 left-0 text-brand-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
+                        <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
+                    </svg>
+                </span>
             </h1>
-            <h2 class="text-xl md:text-2xl text-text-secondary font-light max-w-2xl">
-                Tech Entrepreneur & Developer bridging the gap between <span class="text-white font-medium">technical
-                    execution</span> and <span class="text-white font-medium">strategic growth</span>.
-            </h2>
-            <div class="flex gap-4 mt-8">
-                <a class="group flex items-center gap-2 bg-white dark:bg-white text-black px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all"
-                    href="#ventures">
-                    View My Work
-                    <span
-                        class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            
+            <p class="text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Tech Entrepreneur & Developer bridging the gap between <span class="text-slate-900 font-semibold">technical execution</span> and <span class="text-slate-900 font-semibold">strategic growth</span>.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#ventures" class="px-8 py-4 bg-brand-600 text-white rounded-xl font-bold text-lg hover:bg-brand-700 transition-all shadow-xl shadow-brand-500/20 hover:-translate-y-1">
+                    View My Ventures
                 </a>
-                <a class="flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-slate-600 dark:text-gray-300 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors"
-                    href="#about">
+                <a href="#about" class="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold text-lg hover:bg-slate-50 transition-all hover:-translate-y-1">
                     More About Me
                 </a>
             </div>
         </div>
     </section>
-    <div class="layout-container flex flex-col items-center w-full">
-        <div class="layout-content-container flex flex-col max-w-[1024px] w-full px-4 md:px-10 gap-24 pb-20">
-            <section class="pt-10 scroll-mt-24" id="about">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-                    <div class="md:col-span-4 lg:col-span-3">
-                        <div class="sticky top-28">
-                            <h3 class="text-3xl font-bold mb-2">About Me</h3>
-                            <div class="h-1 w-12 bg-primary rounded-full mb-4"></div>
-                            <p class="text-text-secondary text-sm font-medium uppercase tracking-wide">The Journey</p>
-                        </div>
-                    </div>
-                    <div
-                        class="md:col-span-8 lg:col-span-9 flex flex-col gap-6 text-lg text-slate-700 dark:text-gray-300 leading-relaxed">
-                        <p>
-                            I am a tech entrepreneur and Full Stack Developer with a disciplined foundation as an alumnus of <strong class="text-white">Notre Dame College (NDC)</strong>. I specialize in building scalable tech solutions and leading teams to success. My background bridges the gap between technical execution and strategic business growth.
-                        </p>
-                        <p>
-                            Starting my journey with lines of code, I quickly realized that technology's true power lies
-                            in its ability to solve real-world problems. Over the past four years, I have worked with startups and organizations in the technology sector, both as a founder and consultant.
-                        </p>
-                        <p>
-                            Today, I focus on creating ventures that not only innovate but also sustain. Beyond coding, I bring strong marketing skills and professional design experience. I am passionate about building scalable platforms in FinTech, E-commerce, and Commodity Trading.
-                        </p>
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-slate-200 dark:border-[#283039]">
-                            <div>
-                                <h4 class="text-3xl font-bold text-white">4+</h4>
-                                <span class="text-sm text-text-secondary">Years Exp.</span>
-                            </div>
-                            <div>
-                                <h4 class="text-3xl font-bold text-white">8+</h4>
-                                <span class="text-sm text-text-secondary">Ventures</span>
-                            </div>
-                            <div>
-                                <h4 class="text-3xl font-bold text-white">3</h4>
-                                <span class="text-sm text-text-secondary">Key Roles</span>
-                            </div>
-                            <div>
-                                <h4 class="text-3xl font-bold text-white">100%</h4>
-                                <span class="text-sm text-text-secondary">Commitment</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="scroll-mt-24" id="ventures">
-                <div class="flex flex-col gap-8">
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-3xl font-bold">Ventures</h2>
-                        <p class="text-text-secondary">A curated collection of my businesses and major projects.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]">
-                        <!-- BDChefs.com -->
-                        <a href="https://bdchefs.com" target="_blank"
-                            class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all duration-300 block">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-30"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAbNX2WZvVruDmoqU5NEhNw_vwffMKU72847DR7s_GdW7IpB8eqNqFTsXb_RWIC1zGgz23KLb1NWERL0Bp7kYbmaL3i7mn0lcBiLiUrq8LoP4Tp52Gl9VpPep4h_hSVviqiO-56WsEJPU6avsX9tGcmYAK5jp0oNqzgLk8UE26rPViNOmnScsDba5jKS4DO1qrB7nC9-sUl05UcPlbct66Pt1WRPo26brHip0ouv8fn5xFwDrwaxexJgqPaFNKLEu2GXS2QaIoOxqc');">
-                            </div>
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent">
-                            </div>
-                            <div class="relative h-full p-8 flex flex-col justify-end gap-2">
-                                <div class="mb-auto p-3 bg-primary/20 w-fit rounded-lg text-primary backdrop-blur-sm">
-                                    <span class="material-symbols-outlined text-3xl">restaurant</span>
-                                </div>
-                                <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">BDChefs.com</h3>
-                                <p class="text-gray-300 mb-4">A culinary platform designed to support and showcase chefs. Shark Tank prep milestone.</p>
-                                <div class="flex gap-2 flex-wrap">
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white">FoodTech</span>
-                                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white">Community</span>
-                                </div>
-                            </div>
-                        </a>
 
-                        <!-- BDMeals.com -->
-                        <a href="https://bdmeals.com" target="_blank"
-                            class="md:col-span-2 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all p-6 flex flex-col justify-between block">
-                            <div class="flex flex-col h-full justify-between">
-                                <div class="flex items-center justify-between gap-4">
-                                    <div class="flex items-center gap-4">
-                                        <div class="p-2 bg-orange-500/20 w-fit rounded-lg text-orange-400">
-                                            <span class="material-symbols-outlined text-2xl">local_dining</span>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">BDMeals.com</h3>
-                                            <p class="text-sm text-gray-400">Online food delivery & meal management.</p>
-                                        </div>
-                                    </div>
-                                    <span class="material-symbols-outlined text-gray-600 group-hover:text-white transition-colors">arrow_outward</span>
-                                </div>
-                                <div class="flex gap-2 flex-wrap mt-4">
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">FoodTech</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">Delivery</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- RawImport.com -->
-                        <a href="https://rawimport.com" target="_blank"
-                            class="md:col-span-1 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all p-6 flex flex-col justify-between block">
-                            <div class="flex justify-between items-start">
-                                <div class="p-2 bg-emerald-500/20 w-fit rounded-lg text-emerald-400">
-                                    <span class="material-symbols-outlined text-2xl">import_export</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-white mt-4 group-hover:text-emerald-400 transition-colors">RawImport.com</h3>
-                                <p class="text-xs text-gray-400 mt-1">Bulk commodities & tea.</p>
-                                <div class="flex gap-2 flex-wrap mt-3">
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">International Trade</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">B2B</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- Rozdi.com -->
-                        <a href="https://rozdi.com" target="_blank"
-                            class="md:col-span-1 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all p-6 flex flex-col justify-between block">
-                            <div class="flex justify-between items-start">
-                                <div class="p-2 bg-purple-500/20 w-fit rounded-lg text-purple-400">
-                                    <span class="material-symbols-outlined text-2xl">shopping_bag</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-white mt-4 group-hover:text-purple-400 transition-colors">Rozdi.com</h3>
-                                <p class="text-xs text-gray-400 mt-1">Export quality fashion.</p>
-                                <div class="flex gap-2 flex-wrap mt-3">
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">Fashion</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">E-commerce</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- 2ndhandbajar.com -->
-                        <a href="https://2ndhandbajar.com" target="_blank"
-                            class="md:col-span-1 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all p-6 flex flex-col justify-between block">
-                            <div class="flex justify-between items-start">
-                                <div class="p-2 bg-blue-500/20 w-fit rounded-lg text-blue-400">
-                                    <span class="material-symbols-outlined text-2xl">sell</span>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-white mt-4 group-hover:text-blue-400 transition-colors">2ndhandbajar.com</h3>
-                                <p class="text-xs text-gray-400 mt-1">Pre-owned electronics.</p>
-                                <div class="flex gap-2 flex-wrap mt-3">
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">Re-commerce</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">Marketplace</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- CheapestDisplay.com -->
-                        <a href="https://cheapestdisplay.com" target="_blank"
-                            class="md:col-span-1 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all p-6 flex flex-col justify-between block">
-                            <div class="flex justify-between items-start">
-                                <div class="p-2 bg-red-500/20 w-fit rounded-lg text-red-400">
-                                    <span class="material-symbols-outlined text-2xl">devices</span>
-                                </div>
-                            </div>
-                            <div class="overflow-hidden">
-                                <h3 class="text-base font-bold text-white mt-4 group-hover:text-red-400 transition-colors truncate" title="CheapestDisplay.com">CheapestDisplay.com</h3>
-                                <p class="text-xs text-gray-400 mt-1">Display testing units.</p>
-                                <div class="flex gap-2 flex-wrap mt-3">
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">Hardware</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">E-commerce</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- TakaPai.com -->
-                        <a href="https://takapai.com" target="_blank"
-                            class="md:col-span-2 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all p-6 flex flex-col justify-between block">
-                            <div class="flex flex-col h-full justify-between">
-                                <div class="flex items-center justify-between gap-4">
-                                    <div class="flex items-center gap-4">
-                                        <div class="p-2 bg-teal-500/20 w-fit rounded-lg text-teal-400">
-                                            <span class="material-symbols-outlined text-2xl">payments</span>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-lg font-bold text-white group-hover:text-teal-400 transition-colors">TakaPai.com</h3>
-                                            <p class="text-xs text-gray-400">Accessible FinTech solutions.</p>
-                                        </div>
-                                    </div>
-                                    <span class="material-symbols-outlined text-gray-600 group-hover:text-white transition-colors">arrow_outward</span>
-                                </div>
-                                <div class="flex gap-2 flex-wrap mt-4">
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">FinTech</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">SaaS</span>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- SetupOnce.com -->
-                        <a href="https://setuponce.com" target="_blank"
-                            class="md:col-span-2 group relative overflow-hidden rounded-xl bg-card-dark border border-[#283039] hover:border-primary/50 transition-all p-6 flex flex-col justify-between block">
-                            <div class="flex flex-col h-full justify-between">
-                                <div class="flex items-center justify-between gap-4">
-                                    <div class="flex items-center gap-4">
-                                        <div class="p-2 bg-indigo-500/20 w-fit rounded-lg text-indigo-400">
-                                            <span class="material-symbols-outlined text-2xl">settings_suggest</span>
-                                        </div>
-                                        <div>
-                                            <h3 class="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">SetupOnce.com</h3>
-                                            <p class="text-xs text-gray-400">Tech setup & config services.</p>
-                                        </div>
-                                    </div>
-                                    <span class="material-symbols-outlined text-gray-600 group-hover:text-white transition-colors">arrow_outward</span>
-                                </div>
-                                <div class="flex gap-2 flex-wrap mt-4">
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">Tech Services</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">SaaS</span>
-                                    <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-medium text-gray-300 border border-white/5">AI</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <section class="scroll-mt-24" id="experience">
-                <div class="flex flex-col gap-8">
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-3xl font-bold">Experience</h2>
-                        <p class="text-text-secondary">Track record of building and scaling digital products.</p>
-                    </div>
-                    
-                    <div class="relative pl-8 md:pl-0">
-                        <!-- Vertical Line (Desktop Only) -->
-                        <div class="hidden md:block absolute left-[50%] top-0 bottom-0 w-px bg-slate-800 transform -translate-x-1/2"></div>
-
-                        <!-- Harvey Fresh -->
-                        <div class="md:flex justify-between items-center mb-12 group">
-                            <div class="md:w-[45%] mb-4 md:mb-0 md:text-right">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Executive of Digital Growth</h3>
-                                <h4 class="text-lg text-slate-400 font-medium">Harvey Fresh BD - Orientlink</h4>
-                                <span class="inline-block mt-2 px-3 py-1 bg-slate-800 text-xs font-mono text-slate-300 rounded-full border border-slate-700">Sep 2024 – Present</span>
-                            </div>
-                            <div class="hidden md:block absolute left-[50%] w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 border-4 border-[#101922]"></div>
-                            <div class="md:w-[45%] bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-primary/50 transition-all shadow-lg">
-                                <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Orchestrating the entire digital ecosystem for Orientlink's portfolio brands including 
-                                    <strong class="text-white">Harvey Fresh, Zaika BD, Bulka.com.au, and Wow Choco</strong>.
-                                </p>
-                                <ul class="space-y-2">
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Architected 5 distinct platforms using <strong>WordPress, Laravel, Next.js</strong> & GenAI.</span>
-                                    </li>
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Leading high-fidelity marketing graphics & acquisition campaigns.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                         <!-- Peakward: Assistant to DGM -->
-                        <div class="md:flex justify-between items-center mb-12 flex-row-reverse group">
-                            <div class="md:w-[45%] mb-4 md:mb-0">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Assistant to Deputy General Manager</h3>
-                                <h4 class="text-lg text-slate-400 font-medium">Peakward Group (HK)</h4>
-                                <span class="inline-block mt-2 px-3 py-1 bg-slate-800 text-xs font-mono text-slate-300 rounded-full border border-slate-700">Dec 2023 – Present</span>
-                            </div>
-                            <div class="hidden md:block absolute left-[50%] w-4 h-4 bg-slate-600 rounded-full transform -translate-x-1/2 border-4 border-[#101922] group-hover:bg-primary transition-colors"></div>
-                            <div class="md:w-[45%] bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-primary/50 transition-all shadow-lg">
-                                <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Strategic assistant facilitating international trade of <strong>30,000+ tons</strong> of bulk materials to the Philippines.
-                                </p>
-                                <ul class="space-y-2">
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Coordinating cross-functional teams for project execution.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Peakward: Digital Growth Specialist -->
-                        <div class="md:flex justify-between items-center mb-12 group">
-                            <div class="md:w-[45%] mb-4 md:mb-0 md:text-right">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Digital Growth Specialist</h3>
-                                <h4 class="text-lg text-slate-400 font-medium">Peakward Group (HK)</h4>
-                                <span class="inline-block mt-2 px-3 py-1 bg-slate-800 text-xs font-mono text-slate-300 rounded-full border border-slate-700">Oct 2023 – Oct 2025</span>
-                            </div>
-                            <div class="hidden md:block absolute left-[50%] w-4 h-4 bg-slate-600 rounded-full transform -translate-x-1/2 border-4 border-[#101922] group-hover:bg-primary transition-colors"></div>
-                            <div class="md:w-[45%] bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-primary/50 transition-all shadow-lg">
-                                <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Core member driving digital presence and lead conversion strategies.
-                                </p>
-                                <ul class="space-y-2">
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Supervising SEO strategies & website management.</span>
-                                    </li>
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Developing custom software solutions & converting web traffic into qualified leads.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                         <!-- Peakward: Intern -->
-                        <div class="md:flex justify-between items-center mb-12 flex-row-reverse group">
-                            <div class="md:w-[45%] mb-4 md:mb-0">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Intern (Digital Transformation)</h3>
-                                <h4 class="text-lg text-slate-400 font-medium">Peakward Group (BD)</h4>
-                                <span class="inline-block mt-2 px-3 py-1 bg-slate-800 text-xs font-mono text-slate-300 rounded-full border border-slate-700">Jun 2023 – Sep 2023</span>
-                            </div>
-                            <div class="hidden md:block absolute left-[50%] w-4 h-4 bg-slate-600 rounded-full transform -translate-x-1/2 border-4 border-[#101922] group-hover:bg-primary transition-colors"></div>
-                            <div class="md:w-[45%] bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-primary/50 transition-all shadow-lg">
-                                <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Foundational role in market intelligence and tech migration.
-                                </p>
-                                <ul class="space-y-2">
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Assisted in WordPress to <strong>React</strong> migration team.</span>
-                                    </li>
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Built comprehensive market data on Bangladesh competitors.</span>
-                                    </li>
-                                     <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Manipulated 12,000+ data points for Business Intelligence.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- OurCanvas -->
-                        <div class="md:flex justify-between items-center group">
-                            <div class="md:w-[45%] mb-4 md:mb-0 md:text-right">
-                                <h3 class="text-2xl font-bold text-white group-hover:text-primary transition-colors">Chief Technology Officer</h3>
-                                <h4 class="text-lg text-slate-400 font-medium">OurCanvas Online</h4>
-                                <span class="inline-block mt-2 px-3 py-1 bg-slate-800 text-xs font-mono text-slate-300 rounded-full border border-slate-700">Oct 2021 – Present</span>
-                            </div>
-                            <div class="hidden md:block absolute left-[50%] w-4 h-4 bg-slate-600 rounded-full transform -translate-x-1/2 border-4 border-[#101922] group-hover:bg-primary transition-colors"></div>
-                            <div class="md:w-[45%] bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-primary/50 transition-all shadow-lg">
-                                <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                                    Engineered the core news portal infrastructure using <strong>PHP Laravel</strong>, ensuring high availability.
-                                </p>
-                                <ul class="space-y-2">
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Established complete corporate technical infrastructure & branding.</span>
-                                    </li>
-                                    <li class="flex gap-2 text-xs text-gray-400">
-                                        <span class="material-symbols-outlined text-primary text-sm">check</span>
-                                        <span>Managing server backend, hosting & security protocols.</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="scroll-mt-24" id="honors">
-                <div class="flex flex-col gap-8">
-                    <div class="flex flex-col gap-2">
-                        <h2 class="text-3xl font-bold">Honors & Achievements</h2>
-                        <p class="text-text-secondary">Recognition for impact, leadership, and academic excellence.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Shark Tank -->
-                        <div class="bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-yellow-500/50 transition-all group">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-yellow-500/10 rounded-lg text-yellow-500">
-                                    <span class="material-symbols-outlined text-2xl">star</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-white group-hover:text-yellow-500 transition-colors">Shark Tank Feature</h3>
-                                    <p class="text-xs text-gray-400">International • 50th Edition</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-300 mb-4">
-                                Selected as one of the <strong>Top 52</strong> startups out of 12,000+ applicants globally.
-                            </p>
-                        </div>
-            
-                        <!-- Best Startup Founder -->
-                        <div class="bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-primary/50 transition-all group">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-primary/10 rounded-lg text-primary">
-                                    <span class="material-symbols-outlined text-2xl">trophy</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">Best Startup Founder</h3>
-                                    <p class="text-xs text-gray-400">International • StartupDhaka</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-300 mb-4">
-                                Awarded by StartupDhaka Accelerator, chosen <strong>1st among 275</strong> startups.
-                            </p>
-                        </div>
-            
-                        <!-- Scholarship -->
-                        <div class="bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-emerald-500/50 transition-all group">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-emerald-500/10 rounded-lg text-emerald-500">
-                                    <span class="material-symbols-outlined text-2xl">workspace_premium</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-white group-hover:text-emerald-500 transition-colors">Talent-pool Scholarship</h3>
-                                    <p class="text-xs text-gray-400">National • Government</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-300 mb-4">
-                                Awarded full government scholarship for ranking <strong>6th in Dhaka Board</strong> (SSC).
-                            </p>
-                        </div>
-            
-                        <!-- Case Comp -->
-                        <div class="bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-purple-500/50 transition-all group">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-purple-500/10 rounded-lg text-purple-500">
-                                    <span class="material-symbols-outlined text-2xl">emoji_events</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-white group-hover:text-purple-500 transition-colors">National Champion</h3>
-                                    <p class="text-xs text-gray-400">Business Case Competition</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-300 mb-4">
-                                Winner of the Notre Dame Business Case Competition 2022.
-                            </p>
-                        </div>
-            
-                        <!-- Entrepreneurs Den -->
-                        <div class="bg-card-dark p-6 rounded-xl border border-[#283039] hover:border-orange-500/50 transition-all group">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="p-2 bg-orange-500/10 rounded-lg text-orange-500">
-                                    <span class="material-symbols-outlined text-2xl">lightbulb</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-white group-hover:text-orange-500 transition-colors">Champion</h3>
-                                    <p class="text-xs text-gray-400">Entrepreneurs' Den 2022</p>
-                                </div>
-                            </div>
-                            <p class="text-sm text-gray-300 mb-4">
-                                Secured 1st place in the national entrepreneurship competition.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section class="scroll-mt-24" id="skills">
-                <h2 class="text-3xl font-bold mb-8">Technical &amp; Design Stack</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-card-dark rounded-xl p-6 border border-[#283039]">
-                        <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary">terminal</span> Development
-                        </h3>
-                        <div class="flex flex-col gap-6">
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">Laravel</span>
-                                    <span class="text-primary font-bold">Expert</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-primary w-[95%] rounded-full"></div>
-                                </div>
-                            </div>
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">WordPress</span>
-                                    <span class="text-primary font-bold">Expert</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-primary w-[90%] rounded-full"></div>
-                                </div>
-                            </div>
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">Flutter / PHP</span>
-                                    <span class="text-primary font-bold">Advanced</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-primary w-[85%] rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-card-dark rounded-xl p-6 border border-[#283039]">
-                        <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-emerald-400">cloud</span> Infrastructure
-                        </h3>
-                        <div class="flex flex-col gap-6">
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">VPS / cPanel</span>
-                                    <span class="text-emerald-400 font-bold">Advanced</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-emerald-500 w-[90%] rounded-full"></div>
-                                </div>
-                            </div>
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">Docker</span>
-                                    <span class="text-emerald-400 font-bold">Intermediate</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-emerald-500 w-[70%] rounded-full"></div>
-                                </div>
-                            </div>
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">AWS / Azure</span>
-                                    <span class="text-emerald-400 font-bold">Intermediate</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-emerald-500 w-[75%] rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-card-dark rounded-xl p-6 border border-[#283039]">
-                        <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-purple-400">brush</span> Design
-                        </h3>
-                        <div class="flex flex-col gap-6">
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">Figma</span>
-                                    <span class="text-purple-400 font-bold">Advanced</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-purple-500 w-[90%] rounded-full"></div>
-                                </div>
-                            </div>
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">Adobe Illustrator</span>
-                                    <span class="text-purple-400 font-bold">Expert</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-purple-500 w-[95%] rounded-full"></div>
-                                </div>
-                            </div>
-                            <div class="group">
-                                <div class="flex justify-between mb-1 text-sm">
-                                    <span class="text-gray-300">Brand Management</span>
-                                    <span class="text-purple-400 font-bold">Advanced</span>
-                                </div>
-                                <div class="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-purple-500 w-[85%] rounded-full"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="scroll-mt-24" id="education">
-                <h2 class="text-3xl font-bold mb-8">Education &amp; Certifications</h2>
-                <div class="flex flex-col gap-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div
-                            class="bg-card-dark rounded-xl border border-[#283039] p-6 hover:border-primary/30 transition-colors">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="h-12 w-12 bg-white rounded-lg flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-3xl text-black">school</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-white">Notre Dame College</h3>
-                                    <p class="text-text-secondary text-sm">Higher Secondary Certificate (HSC)</p>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center text-xs text-gray-500">
-                                <span>Dhaka, Bangladesh</span>
-                                <span class="text-primary font-bold">GPA: 5.00</span>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-card-dark rounded-xl border border-[#283039] p-6 hover:border-primary/30 transition-colors">
-                            <div class="flex items-center gap-4 mb-4">
-                                <div class="h-12 w-12 bg-white rounded-lg flex items-center justify-center shrink-0">
-                                    <span class="material-symbols-outlined text-3xl text-black">menu_book</span>
-                                </div>
-                                <div>
-                                    <h3 class="text-lg font-bold text-white">Amin Model Town</h3>
-                                    <p class="text-text-secondary text-sm">School &amp; College</p>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center text-xs text-gray-500">
-                                <span>Secondary School Certificate</span>
-                                <span class="text-primary font-bold">Talent-pool Scholarship</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <h3 class="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary">verified_user</span>
-                            Certifications
-                        </h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- UI/UX Design Fundamentals -->
-                            <div class="flex items-start gap-3 p-4 bg-card-dark/50 rounded-lg border border-[#283039] group hover:border-primary/30 transition-all">
-                                <span class="material-symbols-outlined text-primary mt-1">design_services</span>
-                                <div class="w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h4 class="text-white font-medium text-sm">UI/UX Design Fundamentals</h4>
-                                        <span class="text-[10px] text-gray-500 bg-slate-800 px-1.5 py-0.5 rounded">Jun 2024</span>
-                                    </div>
-                                    <p class="text-xs text-gray-400 mt-1">Ostad (ID: C13816)</p>
-                                </div>
-                            </div>
-
-                            <!-- Business Branding -->
-                            <a href="https://www.udemy.com/certificate/UC-6137c40d-9cec-4ff3-92b0-36b3bc299ab5/" target="_blank" class="flex items-start gap-3 p-4 bg-card-dark/50 rounded-lg border border-[#283039] group hover:border-primary/30 transition-all cursor-pointer">
-                                <span class="material-symbols-outlined text-emerald-400 mt-1">campaign</span>
-                                <div class="w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h4 class="text-white font-medium text-sm group-hover:text-emerald-400 transition-colors">Business Branding & Management</h4>
-                                        <span class="text-[10px] text-gray-500 bg-slate-800 px-1.5 py-0.5 rounded">Feb 2024</span>
-                                    </div>
-                                    <p class="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                                        Udemy 
-                                        <span class="material-symbols-outlined text-[10px]">open_in_new</span>
-                                    </p>
-                                </div>
-                            </a>
-
-                            <!-- Marketing Psychology -->
-                            <a href="https://www.udemy.com/certificate/UC-ffe1f01c-0aac-4106-8c3b-d3f88ff4c8c4/" target="_blank" class="flex items-start gap-3 p-4 bg-card-dark/50 rounded-lg border border-[#283039] group hover:border-primary/30 transition-all cursor-pointer">
-                                <span class="material-symbols-outlined text-purple-400 mt-1">psychology</span>
-                                <div class="w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h4 class="text-white font-medium text-sm group-hover:text-purple-400 transition-colors">Marketing Psychology</h4>
-                                        <span class="text-[10px] text-gray-500 bg-slate-800 px-1.5 py-0.5 rounded">Aug 2023</span>
-                                    </div>
-                                    <p class="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                                        Udemy 
-                                        <span class="material-symbols-outlined text-[10px]">open_in_new</span>
-                                    </p>
-                                </div>
-                            </a>
-
-                            <!-- Logistic Optimization -->
-                            <a href="https://www.udemy.com/certificate/UC-9502fea5-22bb-4222-b958-d9d76b677606/" target="_blank" class="flex items-start gap-3 p-4 bg-card-dark/50 rounded-lg border border-[#283039] group hover:border-primary/30 transition-all cursor-pointer">
-                                <span class="material-symbols-outlined text-orange-400 mt-1">inventory_2</span>
-                                <div class="w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h4 class="text-white font-medium text-sm group-hover:text-orange-400 transition-colors">Supply Chain: Logistic Optimization</h4>
-                                        <span class="text-[10px] text-gray-500 bg-slate-800 px-1.5 py-0.5 rounded">Feb 2024</span>
-                                    </div>
-                                    <p class="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                                        Udemy 
-                                        <span class="material-symbols-outlined text-[10px]">open_in_new</span>
-                                    </p>
-                                </div>
-                            </a>
-
-                             <!-- UI/UX Figma -->
-                             <div class="flex items-start gap-3 p-4 bg-card-dark/50 rounded-lg border border-[#283039] group hover:border-primary/30 transition-all">
-                                <span class="material-symbols-outlined text-pink-400 mt-1">brush</span>
-                                <div class="w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h4 class="text-white font-medium text-sm">UI/UX Design With Figma</h4>
-                                        <span class="text-[10px] text-gray-500 bg-slate-800 px-1.5 py-0.5 rounded">Feb 2024</span>
-                                    </div>
-                                    <p class="text-xs text-gray-400 mt-1">Udemy</p>
-                                </div>
-                            </div>
-
-                            <!-- Typing Speed -->
-                            <div class="flex items-start gap-3 p-4 bg-card-dark/50 rounded-lg border border-[#283039] group hover:border-primary/30 transition-all">
-                                <span class="material-symbols-outlined text-blue-400 mt-1">keyboard</span>
-                                <div class="w-full">
-                                    <div class="flex justify-between items-start">
-                                        <h4 class="text-white font-medium text-sm">Certified Typing Speed: 64 WPM</h4>
-                                        <span class="text-[10px] text-gray-500 bg-slate-800 px-1.5 py-0.5 rounded">Aug 2025</span>
-                                    </div>
-                                    <p class="text-xs text-gray-400 mt-1">Typing.com</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+    <!-- Trusted Brands (Marquee) -->
+    <section class="py-12 bg-slate-900 border-y border-slate-800 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 mb-8 text-center">
+            <p class="text-slate-400 text-sm font-medium uppercase tracking-widest">Trusted by companies & brands</p>
         </div>
-    </div>
-    <footer class="bg-[#0b1219] border-t border-[#283039] pt-20 pb-10" id="contact">
-        <div class="layout-container flex justify-center w-full px-4">
-            <div class="layout-content-container flex flex-col max-w-[1024px] w-full">
-                <div class="flex flex-col items-start gap-8 mb-16">
-                    <h2
-                        class="text-6xl md:text-8xl font-black text-white tracking-tighter hover:text-primary transition-colors cursor-default">
-                        Let's Connect.
-                    </h2>
-                    <div class="flex flex-col gap-4">
-                         <a class="text-2xl md:text-3xl text-gray-400 hover:text-white transition-colors border-b-2 border-transparent hover:border-primary pb-1 w-fit"
-                            href="mailto:yamin@peakward.com">
-                            yamin@peakward.com
-                        </a>
-                        <a class="text-2xl md:text-3xl text-gray-400 hover:text-white transition-colors border-b-2 border-transparent hover:border-primary pb-1 w-fit"
-                            href="tel:+8801816541577">
-                            +880 1816 541 577
-                        </a>
+        <div class="relative flex overflow-x-hidden group">
+            <div class="animate-marquee whitespace-nowrap flex items-center gap-12 sm:gap-20">
+                <!-- Logos - Initial Set -->
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Zaika BD</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Orientlink</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Harvey Fresh</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Abesh</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Pizzalane</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Golden Star</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Sat Sotero Hotel</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">The Golden Sun</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">The BitCoin Cafe</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Smack Subway</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Orbitgraphics LTD</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Alum Auto UAE</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Dibabd.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Orbitgraphics.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Infoodex</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Nagadpay.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Dailygoods.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Naifa Maruf Foundation</span>
+                
+                <!-- Duplicate Set for Seamless Loop -->
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Zaika BD</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Orientlink</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Harvey Fresh</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Abesh</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Pizzalane</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Golden Star</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Sat Sotero Hotel</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">The Golden Sun</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">The BitCoin Cafe</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Smack Subway</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Orbitgraphics LTD</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Alum Auto UAE</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Dibabd.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Orbitgraphics.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Infoodex</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Nagadpay.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Dailygoods.com</span>
+                <span class="text-xl md:text-2xl font-bold text-white opacity-60 hover:opacity-100 transition-opacity">Naifa Maruf Foundation</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-12 gap-12 items-start">
+                <div class="md:col-span-4 sticky top-32">
+                    <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Introduction</span>
+                    <h2 class="text-4xl font-extrabold text-slate-900 mt-2 mb-6">About Me</h2>
+                    <div class="h-1.5 w-20 bg-brand-500 rounded-full"></div>
+                </div>
+                <div class="md:col-span-8 space-y-6 text-lg text-slate-600 leading-relaxed">
+                    <p>
+                        I am a tech entrepreneur and Full Stack Developer with a disciplined foundation as an alumnus of <strong class="text-slate-900">Notre Dame College (NDC)</strong>. I specialize in building scalable tech solutions and leading teams to success.
+                    </p>
+                    <p>
+                        Starting my journey with lines of code, I quickly realized that technology's true power lies in its ability to solve real-world problems. Over the past four years, I have worked with startups and organizations in the technology sector, both as a founder and consultant.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-slate-100">
+                        <div class="text-center md:text-left">
+                            <h4 class="text-4xl font-black text-slate-900">4+</h4>
+                            <span class="text-sm font-medium text-slate-500 uppercase">Years Exp.</span>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="text-4xl font-black text-slate-900">8+</h4>
+                            <span class="text-sm font-medium text-slate-500 uppercase">Ventures</span>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="text-4xl font-black text-slate-900">3</h4>
+                            <span class="text-sm font-medium text-slate-500 uppercase">Key Roles</span>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h4 class="text-4xl font-black text-slate-900">100%</h4>
+                            <span class="text-sm font-medium text-slate-500 uppercase">Commitment</span>
+                        </div>
                     </div>
                 </div>
-                <div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-10 border-t border-gray-800">
-                    <div class="text-gray-500 text-sm">
-                        © 2026 Yamin Hassan Mahdi. All rights reserved.
+            </div>
+        </div>
+    </section>
+
+    <!-- Ventures Section (Enhanced) -->
+    <section id="ventures" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Portfolio</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 mt-2">My Ventures</h2>
+                <p class="text-lg text-slate-600 mt-4">A curated collection of businesses and platforms I have founded or co-founded.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- BDChefs -->
+                <a href="https://bdchefs.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-orange-500">restaurant</span>
                     </div>
-                    <div class="flex gap-6">
-                        <a class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
-                            href="https://www.linkedin.com/in/yaminhassanmahdi" target="_blank">
-                            <span class="text-sm font-medium">LinkedIn</span>
-                            <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                    <div class="h-14 w-14 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">restaurant</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">BDChefs.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Bangladesh's largest culinary platform connecting chefs with enthusiasts. Shark Tank Top 52.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">FoodTech</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Community</span>
+                    </div>
+                </a>
+
+                <!-- BDMeals -->
+                <a href="https://bdmeals.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-amber-500">local_dining</span>
+                    </div>
+                    <div class="h-14 w-14 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">local_dining</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">BDMeals.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Corporate meal management and delivery service streamlining office lunches.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">FoodTech</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Delivery</span>
+                    </div>
+                </a>
+
+                <!-- RawImport -->
+                <a href="https://rawimport.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-emerald-500">import_export</span>
+                    </div>
+                    <div class="h-14 w-14 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">import_export</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">RawImport.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">B2B platform for sourcing bulk commodities and premium tea exports.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Trade</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">B2B</span>
+                    </div>
+                </a>
+
+                <!-- Rozdi -->
+                <a href="https://rozdi.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-purple-500">shopping_bag</span>
+                    </div>
+                    <div class="h-14 w-14 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">shopping_bag</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">Rozdi.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Export-quality fashion e-commerce bringing global brands to local markets.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Fashion</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Retail</span>
+                    </div>
+                </a>
+
+                <!-- 2ndhandbajar -->
+                <a href="https://2ndhandbajar.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-blue-500">sell</span>
+                    </div>
+                    <div class="h-14 w-14 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">sell</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">2ndhandbajar.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Trusted marketplace for buying and selling certified pre-owned electronics.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Re-commerce</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Market</span>
+                    </div>
+                </a>
+
+                <!-- CheapestDisplay -->
+                <a href="https://cheapestdisplay.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-red-500">devices</span>
+                    </div>
+                    <div class="h-14 w-14 bg-red-100 rounded-xl flex items-center justify-center text-red-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">devices</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors truncate">CheapestDisplay.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Affordable, high-quality display units for testing and development.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Hardware</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Store</span>
+                    </div>
+                </a>
+
+                <!-- TakaPai -->
+                <a href="https://takapai.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-teal-500">payments</span>
+                    </div>
+                    <div class="h-14 w-14 bg-teal-100 rounded-xl flex items-center justify-center text-teal-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">payments</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">TakaPai.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Simplifying financial services for everyday users with accessible FinTech solutions.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">FinTech</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">SaaS</span>
+                    </div>
+                </a>
+
+                <!-- SetupOnce -->
+                <a href="https://setuponce.com" target="_blank" class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-slate-100 group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                        <span class="material-symbols-outlined text-9xl text-indigo-500">settings_suggest</span>
+                    </div>
+                    <div class="h-14 w-14 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600 mb-6 group-hover:scale-110 transition-transform shadow-sm">
+                        <span class="material-symbols-outlined text-3xl">settings_suggest</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-600 transition-colors">SetupOnce.com</h3>
+                    <p class="text-slate-600 text-sm mb-6 leading-relaxed">Tech setup and configuration services powered by AI automation.</p>
+                    <div class="flex flex-wrap gap-2 mt-auto">
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">Tech Services</span>
+                        <span class="px-3 py-1 bg-slate-50 text-slate-600 text-xs font-semibold rounded-lg border border-slate-200">AI</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section (White Background) -->
+    <section id="experience" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Career</span>
+                <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Work Experience</h2>
+            </div>
+
+            <div class="relative space-y-12">
+                <!-- Center Line (Desktop) -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-200 -translate-x-1/2"></div>
+                <!-- Left Line (Mobile) -->
+                <div class="md:hidden absolute left-6 top-0 bottom-0 w-0.5 bg-slate-200"></div>
+
+                <!-- Harvey Fresh -->
+                <div class="relative md:flex justify-between items-center group">
+                    <div class="md:w-[45%] pl-14 md:pl-0 md:text-right mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold text-slate-900">Executive of Digital Growth</h3>
+                        <p class="text-brand-600 font-medium text-lg">Harvey Fresh BD - Orientlink</p>
+                        <span class="inline-block mt-2 px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">Sep 2024 – Present</span>
+                    </div>
+                    <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-white border-4 border-brand-500 rounded-full -translate-x-1/2 z-10 top-0 md:top-1/2 md:-translate-y-1/2 shadow-sm"></div>
+                    <div class="md:w-[45%] pl-14 md:pl-0">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all group-hover:border-brand-100">
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">Orchestrating digital ecosystem for brands like <strong class="text-slate-900">Harvey Fresh, Zaika BD, Bulka.com.au</strong>.</p>
+                            <ul class="space-y-2 text-sm text-slate-500">
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Architected 5 platforms using WordPress, Laravel & Next.js.</li>
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Leading high-fidelity marketing & acquisition campaigns.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peakward: Asst DGM -->
+                <div class="relative md:flex justify-between items-center flex-row-reverse group">
+                    <div class="md:w-[45%] pl-14 md:pl-0 mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold text-slate-900">Assistant to Deputy GM</h3>
+                        <p class="text-brand-600 font-medium text-lg">Peakward Group (HK)</p>
+                        <span class="inline-block mt-2 px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">Dec 2023 – Present</span>
+                    </div>
+                    <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-white border-4 border-slate-300 group-hover:border-brand-500 rounded-full -translate-x-1/2 z-10 top-0 md:top-1/2 md:-translate-y-1/2 transition-colors shadow-sm"></div>
+                    <div class="md:w-[45%] pl-14 md:pl-0 md:text-right">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all group-hover:border-brand-100 text-left">
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">Strategic facilitation of <strong>30,000+ tons</strong> bulk material trade to Philippines.</p>
+                            <ul class="space-y-2 text-sm text-slate-500">
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Coordinating cross-functional project teams.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peakward: Digital Growth -->
+                <div class="relative md:flex justify-between items-center group">
+                    <div class="md:w-[45%] pl-14 md:pl-0 md:text-right mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold text-slate-900">Digital Growth Specialist</h3>
+                        <p class="text-brand-600 font-medium text-lg">Peakward Group (HK)</p>
+                        <span class="inline-block mt-2 px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">Oct 2023 – Oct 2025</span>
+                    </div>
+                    <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-white border-4 border-slate-300 group-hover:border-brand-500 rounded-full -translate-x-1/2 z-10 top-0 md:top-1/2 md:-translate-y-1/2 transition-colors shadow-sm"></div>
+                    <div class="md:w-[45%] pl-14 md:pl-0">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all group-hover:border-brand-100">
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">Core member driving digital presence and lead conversion strategies.</p>
+                            <ul class="space-y-2 text-sm text-slate-500">
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Supervising SEO & website management.</li>
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Developing custom software solutions.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peakward: Intern -->
+                <div class="relative md:flex justify-between items-center flex-row-reverse group">
+                    <div class="md:w-[45%] pl-14 md:pl-0 mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold text-slate-900">Intern (Digital Transformation)</h3>
+                        <p class="text-brand-600 font-medium text-lg">Peakward Group (BD)</p>
+                        <span class="inline-block mt-2 px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">Jun 2023 – Sep 2023</span>
+                    </div>
+                    <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-white border-4 border-slate-300 group-hover:border-brand-500 rounded-full -translate-x-1/2 z-10 top-0 md:top-1/2 md:-translate-y-1/2 transition-colors shadow-sm"></div>
+                    <div class="md:w-[45%] pl-14 md:pl-0 md:text-right">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all group-hover:border-brand-100 text-left">
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">Market intelligence and tech migration foundation.</p>
+                            <ul class="space-y-2 text-sm text-slate-500">
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Assisted in WordPress to <strong>React</strong> migration.</li>
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Manipulated 12,000+ data points for BI.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OurCanvas -->
+                <div class="relative md:flex justify-between items-center group">
+                    <div class="md:w-[45%] pl-14 md:pl-0 md:text-right mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold text-slate-900">Chief Technology Officer</h3>
+                        <p class="text-brand-600 font-medium text-lg">OurCanvas Online</p>
+                        <span class="inline-block mt-2 px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">Oct 2021 – Present</span>
+                    </div>
+                    <div class="absolute left-6 md:left-1/2 w-4 h-4 bg-white border-4 border-slate-300 group-hover:border-brand-500 rounded-full -translate-x-1/2 z-10 top-0 md:top-1/2 md:-translate-y-1/2 transition-colors shadow-sm"></div>
+                    <div class="md:w-[45%] pl-14 md:pl-0">
+                        <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-all group-hover:border-brand-100">
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">Engineered core news portal infrastructure using <strong>PHP Laravel</strong>.</p>
+                            <ul class="space-y-2 text-sm text-slate-500">
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Established complete corporate technical infrastructure.</li>
+                                <li class="flex gap-2"><span class="material-symbols-outlined text-brand-500 text-base">check_circle</span> Managing server backend & security.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (Refined Design) -->
+    <section id="skills" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Expertise</span>
+                <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Technical Arsenal</h2>
+                <p class="text-lg text-slate-600 mt-4 max-w-2xl mx-auto">A comprehensive toolkit I leverage to build scalable and robust solutions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Development Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-blue-100 text-blue-600 rounded-xl">
+                            <span class="material-symbols-outlined text-3xl">code</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Development</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2 content-start">
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Laravel</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">WordPress</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">PHP</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Flutter</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">React</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Next.js</span>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-emerald-100 text-emerald-600 rounded-xl">
+                            <span class="material-symbols-outlined text-3xl">cloud</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Infrastructure</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2 content-start">
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">AWS</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">VPS / cPanel</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Docker</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Apache</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Azure</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">GCP</span>
+                    </div>
+                </div>
+
+                <!-- Design & Productivity Card -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="p-3 bg-purple-100 text-purple-600 rounded-xl">
+                            <span class="material-symbols-outlined text-3xl">design_services</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">Design & Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2 content-start">
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Figma</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Illustrator</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Canva</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">VSCode</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">Notion</span>
+                        <span class="px-3 py-1.5 bg-slate-50 text-slate-700 rounded-lg text-sm font-medium border border-slate-200">MS365</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications (Enhanced) -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Learning</span>
+                <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Education & Certifications</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Education Column -->
+                <div class="space-y-8">
+                    <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="material-symbols-outlined text-brand-600 text-3xl">school</span> Academic History
+                    </h3>
+                    
+                    <div class="relative pl-8 border-l-2 border-slate-100">
+                        <div class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-brand-500 border-4 border-white shadow-sm"></div>
+                        <h4 class="text-xl font-bold text-slate-900">Notre Dame College, Dhaka</h4>
+                        <p class="text-slate-600 mt-1">Higher Secondary Certificate (HSC) in Business Studies</p>
+                        <div class="mt-3 flex items-center gap-3 text-sm">
+                            <span class="font-bold text-slate-900">2023</span>
+                            <span class="px-2 py-0.5 bg-green-100 text-green-700 font-bold rounded text-xs">GPA 5.00</span>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-8 border-l-2 border-slate-100">
+                        <div class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-slate-300 border-4 border-white shadow-sm"></div>
+                        <h4 class="text-xl font-bold text-slate-900">Amin Model Town School & College</h4>
+                        <p class="text-slate-600 mt-1">Secondary School Certificate (SSC) in Business Studies</p>
+                        <div class="mt-3 flex flex-wrap gap-2 text-sm items-center">
+                            <span class="font-bold text-slate-900">2020</span>
+                            <span class="px-2 py-0.5 bg-green-100 text-green-700 font-bold rounded text-xs">GPA 5.00</span>
+                            <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 font-bold rounded text-xs">Talent-pool Scholarship (Ranked 6th)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications Column -->
+                <div class="space-y-8">
+                    <h3 class="text-2xl font-bold text-slate-900 flex items-center gap-3 border-b border-slate-100 pb-4">
+                        <span class="material-symbols-outlined text-brand-600 text-3xl">verified</span> Certifications
+                    </h3>
+                    
+                    <div class="grid gap-4">
+                        <a href="https://www.typing.com/student/verify#56141ce0-1be9-4310-9f8-4937a4415c87" target="_blank" class="flex items-center p-4 bg-white border border-slate-100 rounded-xl hover:border-brand-300 hover:shadow-md transition-all group">
+                            <div class="h-12 w-12 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600 mr-4 shrink-0">
+                                <span class="material-symbols-outlined text-2xl">keyboard</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Certified Typing Speed: 64 WPM</h4>
+                                <p class="text-xs text-slate-500">Typing.com • Aug 2025</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover:text-brand-600">open_in_new</span>
                         </a>
-                        <a class="text-gray-400 hover:text-white transition-colors flex items-center gap-2" href="#">
-                            <span class="text-sm font-medium">GitHub</span>
-                            <span class="material-symbols-outlined text-sm">arrow_outward</span>
+
+                        <a href="#" class="flex items-center p-4 bg-white border border-slate-100 rounded-xl hover:border-brand-300 hover:shadow-md transition-all group">
+                            <div class="h-12 w-12 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600 mr-4 shrink-0">
+                                <span class="material-symbols-outlined text-2xl">design_services</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors">UI/UX Design Fundamentals</h4>
+                                <p class="text-xs text-slate-500">Ostad (ID: C13816) • Jun 2024</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover:text-brand-600">open_in_new</span>
+                        </a>
+
+                        <a href="https://www.udemy.com/certificate/UC-6137c40d-9cec-4ff3-92b0-36b3bc299ab5/" target="_blank" class="flex items-center p-4 bg-white border border-slate-100 rounded-xl hover:border-brand-300 hover:shadow-md transition-all group">
+                            <div class="h-12 w-12 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600 mr-4 shrink-0">
+                                <span class="material-symbols-outlined text-2xl">campaign</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Business Branding & Management</h4>
+                                <p class="text-xs text-slate-500">Udemy • Feb 2024</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover:text-brand-600">open_in_new</span>
+                        </a>
+
+                        <a href="https://www.udemy.com/certificate/UC-ffe1f01c-0aac-4106-8c3b-d3f88ff4c8c4/" target="_blank" class="flex items-center p-4 bg-white border border-slate-100 rounded-xl hover:border-brand-300 hover:shadow-md transition-all group">
+                            <div class="h-12 w-12 bg-pink-50 rounded-lg flex items-center justify-center text-pink-600 mr-4 shrink-0">
+                                <span class="material-symbols-outlined text-2xl">psychology</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Marketing Psychology</h4>
+                                <p class="text-xs text-slate-500">Udemy • Aug 2023</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover:text-brand-600">open_in_new</span>
+                        </a>
+
+                        <a href="https://www.udemy.com/certificate/UC-9502fea5-22bb-4222-b958-d9d76b677606/" target="_blank" class="flex items-center p-4 bg-white border border-slate-100 rounded-xl hover:border-brand-300 hover:shadow-md transition-all group">
+                            <div class="h-12 w-12 bg-orange-50 rounded-lg flex items-center justify-center text-orange-600 mr-4 shrink-0">
+                                <span class="material-symbols-outlined text-2xl">inventory_2</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Supply Chain: Logistic Optimization</h4>
+                                <p class="text-xs text-slate-500">Udemy • Feb 2024</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover:text-brand-600">open_in_new</span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
-</body>
+    </section>
 
+    <!-- Honors Section -->
+    <section id="honors" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-slate-900">Honors & Achievements</h2>
+                <p class="text-slate-600 mt-4">Recognition for impact, leadership, and excellence.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Shark Tank -->
+                <div class="p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-lg transition-all bg-white hover:border-yellow-200 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="p-2 bg-yellow-50 rounded-lg text-yellow-600 material-symbols-outlined">star</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 group-hover:text-yellow-600 transition-colors">Shark Tank Feature</h3>
+                            <p class="text-xs text-slate-500">International • Top 52</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600">Selected as one of the Top 52 startups out of 12,000+ applicants globally.</p>
+                </div>
+
+                <!-- Best Startup Founder -->
+                <div class="p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-lg transition-all bg-white hover:border-brand-200 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="p-2 bg-blue-50 rounded-lg text-brand-600 material-symbols-outlined">trophy</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 group-hover:text-brand-600 transition-colors">Best Founder</h3>
+                            <p class="text-xs text-slate-500">StartupDhaka • 1st/275</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600">Awarded by StartupDhaka Accelerator, chosen 1st among 275 startups.</p>
+                </div>
+
+                <!-- Scholarship -->
+                <div class="p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-lg transition-all bg-white hover:border-emerald-200 group">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="p-2 bg-emerald-50 rounded-lg text-emerald-600 material-symbols-outlined">workspace_premium</span>
+                        <div>
+                            <h3 class="font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">Talent-pool Scholar</h3>
+                            <p class="text-xs text-slate-500">National • Government</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-600">Full government scholarship for ranking 6th in Dhaka Board (SSC).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-400 font-bold tracking-wider uppercase text-sm">Testimonials</span>
+                <h2 class="text-4xl font-extrabold mt-2">What People Say</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-slate-800 p-8 rounded-2xl relative">
+                    <span class="material-symbols-outlined text-6xl text-brand-900 absolute top-6 left-6 opacity-50">format_quote</span>
+                    <p class="text-slate-300 italic mb-6 relative z-10">"Yamin demonstrates exceptional skill in both technical development and strategic growth. His work ethics and ability to deliver complex projects are outstanding."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="h-12 w-12 bg-brand-600 rounded-full flex items-center justify-center text-xl font-bold">NJ</div>
+                        <div>
+                            <h4 class="font-bold">Md Nowshad Jaman</h4>
+                            <p class="text-xs text-brand-400">CEO - Orbit Graphics LTD</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-slate-800 p-8 rounded-2xl relative">
+                    <span class="material-symbols-outlined text-6xl text-brand-900 absolute top-6 left-6 opacity-50">format_quote</span>
+                    <p class="text-slate-300 italic mb-6 relative z-10">"A visionary tech leader. Yamin's contributions to OurCanvas regarding infrastructure and operations have been pivotal to our success."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="h-12 w-12 bg-purple-600 rounded-full flex items-center justify-center text-xl font-bold">JH</div>
+                        <div>
+                            <h4 class="font-bold">Junaed Habib</h4>
+                            <p class="text-xs text-brand-400">Head of Program - OurCanvas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-50 border-t border-slate-200 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter mb-8">Let's Connect.</h2>
+            <div class="flex flex-col gap-4 items-center mb-16">
+                <a href="mailto:yamin@peakward.com" class="text-2xl md:text-3xl text-slate-500 hover:text-brand-600 font-medium transition-colors">yamin@peakward.com</a>
+                <a href="tel:+8801816541577" class="text-2xl md:text-3xl text-slate-500 hover:text-brand-600 font-medium transition-colors">+880 1816 541 577</a>
+            </div>
+            
+            <div class="flex justify-between items-center border-t border-slate-200 pt-10 flex-col md:flex-row gap-6">
+                <p class="text-slate-500 text-sm">© 2026 Yamin Hassan Mahdi. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="https://linkedin.com/in/yaminhassanmahdi" class="text-slate-500 hover:text-brand-600 font-medium text-sm flex items-center gap-1">LinkedIn <span class="material-symbols-outlined text-sm">arrow_outward</span></a>
+                    <a href="#" class="text-slate-500 hover:text-brand-600 font-medium text-sm flex items-center gap-1">GitHub <span class="material-symbols-outlined text-sm">arrow_outward</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const body = document.body;
+            
+            if (menu.classList.contains('menu-closed')) {
+                menu.classList.remove('menu-closed');
+                menu.classList.add('menu-open');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                body.style.overflow = 'hidden';
+            } else {
+                menu.classList.remove('menu-open');
+                menu.classList.add('menu-closed');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                body.style.overflow = '';
+            }
+        }
+    </script>
+</body>
 </html>
